@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ducqv.com.fooball.activity.MainActivity" >
+
+    <item android:id="@+id/mn_chupanh"
+        android:title="@string/chupanh"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/mn_layanh"
+        android:title="@string/layanhtuthuvien"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>

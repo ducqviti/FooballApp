@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">FooballApp</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tv_title_email_use">Email hoặc tên đang nhập</string>
+    <string name="tv_title_pass">Mật khẩu</string>
+    <string name="tv_dangky">Sign Up</string>
+    <string name="tv_dangnhap">Log In</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Android!</string>
+    <string name="slide_1_desc">Chào các bạn tới với lập trình Android!</string>
+
+    <string name="slide_2_title">Aptech</string>
+    <string name="slide_2_desc">Mời các bạn tới với trường DH Aptech!</string>
+
+    <string name="slide_3_title">Android</string>
+    <string name="slide_3_desc">Đây là lớp học lập trình Android!</string>
+
+    <string name="slide_4_title">Đào Tạo</string>
+    <string name="slide_4_desc">Đên vơi chúng tôi bạn được hướng dẫn vào đào tạo tốt nhất!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+    <string name="email_register">Email</string>
+    <string name="name_register">Name Use</string>
+    <string name="pass_register">Pass</string>
+    <string name="cancel_register">Cancel</string>
+    <string name="register">Register</string>
+    <string name="login">Log In</string>
+    <string name="title_task">Thêm nhóm</string>
+    <string name="add_item">Thêm công việc</string>
+    <string name="note_task">Note Task</string>
+    <string name="item_move">Di chuyển</string>
+    <string name="title_dialog_add">Add Title</string>
+    <string name="tv_bang_dau_sao">Bảng đánh dấu sao</string>
+    <string name="tv_remove_star">Bỏ đánh dấu sao bản</string>
+    <string name="tv_add_star">Đánh dấu sao</string>
+    <string name="tv_share_table">Chia sẻ liên kế của bảng</string>
+    <string name="tv_remove_table">Xoá bảng</string>
+    <string name="tv_personal">Bảng Cá Nhân</string>
+    <string name="log_out">Log Out</string>
+    <string name="tv_addcard">Add Card</string>
+
+    <string name="mn_add">Thêm Công Việc</string>
+    <string name="mn_edit">Sửa Tên</string>
+    <string name="mn_Move">Di chuyển</string>
+    <string name="mn_Delete">Xoá</string>
+    <string name="Done">Done </string>
+    <string name="change">Thay Đổi </string>
+    <string name="layanhtuthuvien">Ảnh Từ Thư Viện </string>
+    <string name="chupanh">Chụp Ảnh Mới </string>
+</resources>

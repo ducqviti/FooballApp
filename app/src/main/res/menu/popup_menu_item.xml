@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/editItem"
+        android:title="@string/mn_edit"></item>
+    <item
+        android:id="@+id/deleteItem"
+        android:title="@string/mn_Delete"></item>
+    <item
+        android:id="@+id/moveItem"
+        android:title="@string/mn_Move"></item>
+    <item
+        android:id="@+id/doneItem"
+        android:title="@string/Done"></item>
+</menu>

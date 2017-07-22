@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/editcmt"
+        android:title="Chỉnh Sửa">
+
+    </item>
+
+    <item
+        android:id="@+id/deletecmt"
+        android:title="@string/mn_Delete">
+    </item>
+    <item
+        android:id="@+id/donecmt"
+        android:title="@string/Done">
+    </item>
+</menu>
