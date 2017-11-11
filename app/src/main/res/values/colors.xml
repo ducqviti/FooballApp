@@ -6,8 +6,11 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGhostWhite">#F8F8FF</color>
     <color name="colorBlue">#0000FF</color>
+    <color name="white">#fff</color>
+    <color name="backgound_app">#88c8ea</color>
     <color name="Gray">#c9c1c1</color>
     <color name="colorDimGray">#f1eeee</color>
+    <color name="transparent">#00000000</color>
     <color name="colorGreen">#00FF00</color>
     <color name="colorGreenYellow">#ADFF2F</color>
     <color name="colorYellow">#FFFF00</color>
@@ -18,6 +21,7 @@
     <color name="bg_screen2">#20d2bb</color>
     <color name="bg_screen3">#3395ff</color>
     <color name="bg_screen4">#c873f4</color>
+    <color name="slna">#da2a812f</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#d1395c</color>

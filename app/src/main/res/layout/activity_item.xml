@@ -128,12 +128,13 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="5"
                     android:hint="Viết bình luận..."
+                    android:inputType="text"
                     android:maxLines="4" />
 
                 <ImageView
                     android:id="@+id/img_Anhchup"
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="1dp"
                     android:padding="3dp" />

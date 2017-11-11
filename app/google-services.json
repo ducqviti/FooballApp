@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "987317100165",
+    "project_id": "fooballapp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987317100165:android:822d517cd773c324",
+        "android_client_info": {
+          "package_name": "ducqv.com.fooball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987317100165-iq2t5dvdmi82fmrf40jrflt0k6dbbprf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ducqv.com.fooball",
+            "certificate_hash": "5af3250c10a7e7d366f0357d0dde7110e2ef8f5c"
+          }
+        },
+        {
+          "client_id": "987317100165-5r9bbku90pjs5mumv3g3a4hcpepp21h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXS3FDd8QBQ8ysnMckkkbpKyxcWoOHX24"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

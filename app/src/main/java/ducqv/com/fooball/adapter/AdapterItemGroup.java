@@ -16,17 +16,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
 import ducqv.com.fooball.R;
 import ducqv.com.fooball.action.Listener;
 import ducqv.com.fooball.activity.ItemActivity;
 import ducqv.com.fooball.activity.MainActivity;
 import ducqv.com.fooball.db.DatabaseHelper;
-import ducqv.com.fooball.object.Group;
 import ducqv.com.fooball.object.Item;
 
 /**
@@ -201,6 +197,7 @@ public class AdapterItemGroup extends RecyclerView.Adapter<RecyclerView.ViewHold
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(dialoglayout);
         builder.setTitle("Sửa Tên Thẻ");
+        builder.setCancelable(false);
         final EditText edititem = (EditText) dialoglayout.findViewById(R.id.tvAdd);
         //lay ten item
         edititem.setText(item.getNameItem().toString());
@@ -210,7 +207,6 @@ public class AdapterItemGroup extends RecyclerView.Adapter<RecyclerView.ViewHold
                 dialog.dismiss();
             }
         });
-
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -233,6 +229,7 @@ public class AdapterItemGroup extends RecyclerView.Adapter<RecyclerView.ViewHold
         final AlertDialog alertDialog = new AlertDialog.Builder(
                 context).create();
         alertDialog.setTitle("Xoá");
+        alertDialog.setCancelable(false);
         alertDialog.setMessage("Bạn muốn xoá " + item.getNameItem().toString()
                 + " khỏi danh sách ?");
         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",
@@ -262,6 +259,7 @@ public class AdapterItemGroup extends RecyclerView.Adapter<RecyclerView.ViewHold
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_title);
         dialog.setTitle("Chuyển");
+        dialog.setCancelable(false);
         mRecyvlerDialog = (RecyclerView) dialog.findViewById(R.id.RecyclerDialog);
         mRecyvlerDialog.setLayoutManager(new LinearLayoutManager(context));
         dialogAdapter = new DialogAdapter(dbHelper.getAllGroup());
@@ -270,14 +268,11 @@ public class AdapterItemGroup extends RecyclerView.Adapter<RecyclerView.ViewHold
             @Override
             public void setOntitleClick(int idTitle) {
                 Log.d("setOntitleClick1111", "setOntitleClick: " + idTitle);
-                // thay ko
-
                 item.setIdGroupItem(idTitle);
                 dbHelper.UpdateIdGroup(item);
                 onUpdateListener.onUpdate();
                 notifyDataSetChanged();
                 dialog.dismiss();
-
             }
         });
         dialog.show();

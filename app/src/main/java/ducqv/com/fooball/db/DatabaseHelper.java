@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ducqv.com.fooball.object.Comment;
+import ducqv.com.fooball.object.Dangky;
 import ducqv.com.fooball.object.Group;
 import ducqv.com.fooball.object.Item;
 
@@ -22,26 +23,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "foobal";
     private static final int DATABASE_VERSION = 1;
-
+    //table
     private static final String TABLE_NAME = "table_foobal";
-    private static final String TABLE_GROUP = "table_group";
-    private static final String TABLE_ITEM = "table_Item";
-    private static final String TABLE_COMMENT = "table_comment";
-
     private static final String KEY_ID = "id_foobal";
-    private static final String KEY_ID_GROUP = "id_group";
-    private static final String KEY_ID_ITEM = "id_item";
-    private static final String KEY_ID_COMMENT = "id_item";
-    public static final String KEY_ID_GROUP_ITEM = "id_group_item";
-    public static final String KEY_ID_ITEM_COMMENT = "id_group_item_comment";
-
     private static final String KEY_NAME = "name_foobal";
+    //dang ky
+    private static final String TABLE_DANGKY = "table_dangky";
+    private static final String KEY_ID_DANGKY = "id_dangky";
+    private static final String KEY_TEN_DANGKY = "name_dangky";
+    private static final String KEY_EMAIL = "name_email";
+    private static final String KEY_MATKHAU = "name_matkhau";
+    private static final String KEY_NHAPLAIMATKHAU = "name_nhaplaimatkhau";
+    //Group
+    private static final String TABLE_GROUP = "table_group";
+    private static final String KEY_ID_GROUP = "id_group";
     private static final String KEY_NAME_GROUP = "name_group";
+    //Item
+    private static final String TABLE_ITEM = "table_Item";
+    private static final String KEY_ID_ITEM = "id_item";
+    public static final String KEY_ID_GROUP_ITEM = "id_group_item";
     private static final String KEY_NAME_ITEM = "name_item";
+    //Comment
+    private static final String TABLE_COMMENT = "table_comment";
+    private static final String KEY_ID_COMMENT = "id_item";
+    public static final String KEY_ID_ITEM_COMMENT = "id_group_item_comment";
     private static final String KEY_MOTA = "name_mota";
     private static final String KEY_NHANXET = "name_nhanxet";
     private static final String KEY_IMAGE = "name_image";
-
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -51,6 +59,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+
+        String CREATE_DANGKY_TABLE = "CREATE TABLE " + TABLE_DANGKY + "("
+                + KEY_ID_DANGKY + " INTEGER PRIMARY KEY,"
+                + KEY_TEN_DANGKY + " TEXT,"
+                + KEY_EMAIL + " TEXT,"
+                + KEY_MATKHAU + " TEXT,"
+                + KEY_NHAPLAIMATKHAU + " TEXT" + ")";
 
         String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_GROUP + "("
                 + KEY_ID_GROUP + " INTEGER PRIMARY KEY,"
@@ -69,21 +84,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_IMAGE + " TEXT" + ")";
 
         db.execSQL(CREATE_CONTACTS_TABLE);
+        db.execSQL(CREATE_DANGKY_TABLE);
         db.execSQL(CREATE_GROUP_TABLE);
         db.execSQL(CREATE_ITEM_TABLE);
         db.execSQL(CREATE_COMMENT_TABLE);
-        Log.d("CREATE_GROUP_TABLE", "onCreate: " + CREATE_GROUP_TABLE);
+
+        Log.d("CREATE_DANGKY_TABLE", "onCreate: " + CREATE_DANGKY_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IP EXITS" + TABLE_NAME);
+        db.execSQL("DROP TABLE IP EXITS" + TABLE_DANGKY);
         db.execSQL("DROP TABLE IP EXITS" + TABLE_GROUP);
         db.execSQL("DROP TABLE IP EXITS" + TABLE_ITEM);
         db.execSQL("DROP TABLE IP EXITS" + TABLE_COMMENT);
+        onCreate(db);
     }
 
-    //them nhom đay la khi click vào nut add sẽ gọi ham nay
+    public void addDangky(Dangky dangky) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_TEN_DANGKY, dangky.getTendangnhap());
+        values.put(KEY_EMAIL, dangky.getEmail());
+        values.put(KEY_MATKHAU, dangky.getMatkhau());
+        values.put(KEY_NHAPLAIMATKHAU, dangky.getNhaplaimatkhau());
+        db.insert(TABLE_DANGKY, null, values);
+        db.close();
+    }
+
+    //thêm nhóm
     public void AddGroup(Group group) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -120,7 +150,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_IMAGE, itemcomment.getUrlImage());
         db.insert(TABLE_COMMENT, null, values);
         db.close();
-
     }
 
     public int updateGroup(Group group) {
@@ -184,6 +213,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public List<Dangky> getAllDangky() {
+        List<Dangky> contactList = new ArrayList<Dangky>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_DANGKY;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Dangky dangky = new Dangky();
+                dangky.setId(Integer.parseInt(cursor.getString(0)));
+                dangky.setTendangnhap(cursor.getString(1));
+                dangky.setEmail(cursor.getString(2));
+                dangky.setMatkhau(cursor.getString(3));
+                dangky.setNhaplaimatkhau(cursor.getString(4));
+                contactList.add(dangky);
+            } while (cursor.moveToNext());
+        }
+        return contactList;
+    }
+
     //Hàm getAllContacts() sẽ trả về 1 List gồm tất cả các nhom trong bảngra
     public List<Group> getAllGroup() {
         List<Group> groupList = new ArrayList<>();
@@ -198,22 +247,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return groupList;
-    }
-
-    //Hàm getAllContacts() sẽ trả về 1 List gồm tất cả các nhom trong bảngra
-    public List<Item> getAllItem() {
-        List<Item> itemList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_GROUP;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        Log.d("rawQuery", "getAllGroup: " + selectQuery);
-        if (cursor.moveToFirst()) {
-            do {
-                Item item = new Item();
-                itemList.add(item);
-            } while (cursor.moveToNext());
-        }
-        return itemList;
     }
 
     //lây ID cua từng Group
@@ -231,11 +264,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Item item = new Item(cursor.getInt(0)
                         , cursor.getString(1)
                         , cursor.getInt(2));
-                // Adding contact to list
                 itemList.add(item);
             } while (cursor.moveToNext());
         }
-        // return item list
         return itemList;
 
     }

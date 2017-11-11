@@ -14,16 +14,6 @@ public class Item implements Parcelable {
     private int idGroupItem;
     private String motaItem;
     private String nhanxetItem;
-    private int idCmt;
-    private String urlImage;
-
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
-    }
 
     public Item() {
     }
@@ -40,7 +30,6 @@ public class Item implements Parcelable {
         idGroupItem = in.readInt();
         motaItem = in.readString();
         nhanxetItem = in.readString();
-        idCmt = in.readInt();
     }
 
     public static final Creator<Item> CREATOR = new Creator<Item>() {
@@ -87,22 +76,6 @@ public class Item implements Parcelable {
         this.motaItem = motaItem;
     }
 
-    public String getNhanxetItem() {
-        return nhanxetItem;
-    }
-
-    public void setNhanxetItem(String nhanxetItem) {
-        this.nhanxetItem = nhanxetItem;
-    }
-
-    public int getIdCmt() {
-        return idCmt;
-    }
-
-    public void setIdCmt(int idCmt) {
-        this.idCmt = idCmt;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -115,7 +88,6 @@ public class Item implements Parcelable {
         dest.writeInt(idGroupItem);
         dest.writeString(motaItem);
         dest.writeString(nhanxetItem);
-        dest.writeInt(idCmt);
     }
     @Override
     public String toString() {

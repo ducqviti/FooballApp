@@ -38,16 +38,10 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context context;
     private ArrayList<Item> itemArrayList;
     Listener.OnUpdateListener onUpdateListener;
-    AdapterItemGroup madapterItemGroup;
 
     public AdapterGroup(Context context) {
         this.context = context;
         dbHelper = new DatabaseHelper(context);
-    }
-
-    public void addList(List<Group> data) {
-        listData.addAll(data);
-        notifyDataSetChanged();
     }
 
     public void setList(List<Group> data) {
@@ -67,7 +61,6 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return new AdapterGroup.RecyclerViewHolder(groupView);
     }
 
-
     public class RecyclerViewHolder extends RecyclerView.ViewHolder
             implements AdapterView.OnItemClickListener {
         private TextView mtvGroup;
@@ -80,7 +73,6 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mbtnMenuGroup = (ImageView) itemView.findViewById(R.id.btnMenuGroup);
             mtvGroup = (TextView) itemView.findViewById(R.id.tvGroup);
             itemArrayList = new ArrayList<>();
-
             mrecycle_Item_Group = (RecyclerView) itemView.findViewById(R.id.recycle_item);
             mrecycle_Item_Group.setLayoutManager(new GridLayoutManager(context, 1));
             madapterItemGroup = new AdapterItemGroup(itemArrayList, context);
@@ -112,7 +104,6 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         });
         ((RecyclerViewHolder) holder).updateItemGroup(position);
     }
-
 
     @Override
     public int getItemCount() {
@@ -155,6 +146,7 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(dialoglayout);
         builder.setTitle("Sửa Tên Nhom");
+        builder.setCancelable(false);
         final EditText edititem = (EditText) dialoglayout.findViewById(R.id.tvAdd);
         //lay ten group
         edititem.setText(group.getNameGroup().toString());
@@ -164,7 +156,6 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 dialog.dismiss();
             }
         });
-
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -175,7 +166,6 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 //set title moi lay tu additem
                 group.setNameGroup(edititem.getText().toString());
                 // trong doi tuong group nay no da co id roi nen minh ko phai getid cho no nua
-
                 dbHelper.updateGroup(group);
                 ((MainActivity) context).getInfoGroup();
                 dialog.dismiss();
@@ -188,6 +178,7 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         final AlertDialog alertDialog = new AlertDialog.Builder(
                 context).create();
         alertDialog.setTitle("Xoá");
+        alertDialog.setCancelable(false);
         alertDialog.setMessage("Bạn muốn xoá " + group.getNameGroup().toString()
                 + " khỏi danh sách ?");
         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",
@@ -214,6 +205,4 @@ public class AdapterGroup extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private boolean isValidAdd(String add) {
         return add.isEmpty();
     }
-
-
 }

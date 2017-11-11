@@ -5,7 +5,7 @@
 
     <!-- Set màu nền-->
     <solid
-        android:color="@color/colorDimGray" >
+        android:color="@color/backgound_app" >
     </solid>
 
     <!-- đặt thuộc tính màu và độ rộng của đường viền -->
@@ -16,10 +16,10 @@
 
     <!-- các thuộc tính căn chỉnh-->
     <padding
-    android:left="1dp"
-    android:top="1dp"
-    android:right="1dp"
-    android:bottom="1dp" >
+    android:left="3dp"
+    android:top="3dp"
+    android:right="3dp"
+    android:bottom="3dp" >
     </padding>
 
     <!-- và đây là bán kính đường tròn ở 4 góc -->

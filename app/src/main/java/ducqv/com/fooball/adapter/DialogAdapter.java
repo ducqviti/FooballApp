@@ -20,9 +20,6 @@ import ducqv.com.fooball.db.DatabaseHelper;
 public class DialogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ducqv.com.fooball.object.Group> listData;
     OntitleClick onTitleClick;
-    Group group;
-    MainActivity mainActivity;
-    DatabaseHelper dbHelper;
 
     public DialogAdapter(List<ducqv.com.fooball.object.Group> arrayGroup) {
         this.listData = arrayGroup;
@@ -33,7 +30,6 @@ public class DialogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         listData = data;
         notifyDataSetChanged();
     }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());

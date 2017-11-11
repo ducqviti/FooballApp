@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgound_app"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_20"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_Name_Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên Đăng Nhập" />
+
+        <EditText
+            android:id="@+id/edit_Name_Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_register"
+            android:textColorHint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_Email_Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emailphone"
+             />
+
+        <EditText
+            android:id="@+id/edit_Email_Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_register"
+            android:textColorHint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_Pass_Register"
+            android:layout_width="match_parent"
+            android:text="Nhập mật khâu"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/edit_Nhappass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white" />
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Nhập lại mật khâu"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edit_Nhaplaipass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColorHint="@color/white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_5">
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_10"
+            android:layout_toLeftOf="@+id/btRegister"
+            android:background="@drawable/border_button_transparent"
+            android:padding="@dimen/padding_5"
+            android:text="@string/cancel_register"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/border_button_dk"
+            android:padding="@dimen/padding_5"
+            android:text="@string/register"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+</LinearLayout>

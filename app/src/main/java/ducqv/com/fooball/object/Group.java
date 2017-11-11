@@ -43,19 +43,6 @@ public class Group implements Parcelable {
         return idGroup;
     }
 
-    public String getMoveTitle() {
-
-        return moveTitle;
-    }
-
-    public void setMoveTitle(String moveTitle) {
-        this.moveTitle = moveTitle;
-    }
-
-    public void setIdGroup(int idGroup) {
-        this.idGroup = idGroup;
-    }
-
     public String getNameGroup() {
         return nameGroup;
     }

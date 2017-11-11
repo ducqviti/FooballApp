@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,27 +22,17 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import ducqv.com.fooball.R;
-import ducqv.com.fooball.action.Listener;
 import ducqv.com.fooball.adapter.AdapterItem;
 import ducqv.com.fooball.db.DatabaseHelper;
 import ducqv.com.fooball.object.Comment;
@@ -53,7 +42,6 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
 
     private DatabaseHelper dbHelper;
     private Item objItem;
-    private Comment objComment;
     private AdapterItem adapterItem;
     private List<Item> listData = new ArrayList<Item>();
     private ImageView mbtnBack, mimg_clean, mimg_Menu, mimg_Check, mbtn_Cmt, mim_camera, mimg_Anhchup, mget_image;
@@ -69,7 +57,7 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
     private String nameImage;// khoi tao bien de gan tên của ảnh
     private Comment objCommentLongClick;
     private Boolean checkCap = false;
-    private ImageView editImage;
+    private ImageView meditImage, mcamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +66,6 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         dbHelper = new DatabaseHelper(this);
         //chuyen obj
         objItem = getIntent().getParcelableExtra("item");
-
         LinearLayoutManager layoutManager = new LinearLayoutManager
                 (this, LinearLayoutManager.VERTICAL, false);
         listData = new ArrayList<>();
@@ -123,11 +110,6 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         getComment();
     }
 
-    public void updateList(List<Item> data) {
-        listData = data;
-
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -142,7 +124,6 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
                 if (checkCap) {
                     ClickSaveCmt(SHOW_CAMERA);
                     checkCap = false;
-
                 } else
                     ClickSaveCmt(LOAD_IMAGE_CAPTURE);
                 getComment();
@@ -154,7 +135,7 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.get_image:
                 getImage();
                 break;
-            case R.id.editImage:
+            case R.id.camera:
                 showMayAnh(SHOW_EDIT_CAMERA);
                 break;
         }
@@ -192,7 +173,6 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         //update vao database
         Comment comment = new Comment();
         comment.setIdItem(objItem.getIdItem());
-
         switch (click) {
             case SHOW_CAMERA:
                 comment.setUrlImage(nameImage);
@@ -206,18 +186,15 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         mtv_Nhanxet.setText("");
         mimg_Anhchup.setImageBitmap(null);
         nameImage = "";
-
         //lam ẩn ban phim khi ban enter
         if (mRecyclerViewCmt != null) {
             InputMethodManager imm = (InputMethodManager)
                     getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(mRecyclerViewCmt.getWindowToken(), 0);
         }
-
     }
 
     public void showMayAnh(int type) {
-
         // Mở camera mặc định
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Tiến hành gọi Capture Image intent
@@ -253,9 +230,7 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
             case SHOW_EDIT_CAMERA:
                 Bitmap bm = (Bitmap) data.getExtras().get("data");
                 saveToInternalStorage(bm);
-
-                editImage.setImageBitmap(bm);
-
+                meditImage.setImageBitmap(bm);
                 break;
         }
         if (requestCode == LOAD_IMAGE_CAPTURE && resultCode == RESULT_OK && null != data) {
@@ -332,7 +307,9 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
         return image;
+
     }
+
     public void showdialogEditComment(final Comment comment) {
         LayoutInflater inflater = (LayoutInflater)
                 this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -343,13 +320,13 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
         final EditText additem = (EditText) dialoglayout.findViewById(R.id.tvEdit);
         //lay title tu
         additem.setText(comment.getNhanxet());
-        Log.d("Ducdp", "getNhanxet: "+ comment.getNhanxet());
-        editImage = (ImageView) dialoglayout.findViewById(R.id.editImage);
+        Log.d("Ducdp", "getNhanxet: " + comment.getNhanxet());
+        meditImage = (ImageView) dialoglayout.findViewById(R.id.editImage);
+        meditImage.setImageBitmap(BitmapFactory.decodeFile(comment.getUrlImage()));
+        Log.d("Ducdp", "showdialogEditComment: " + BitmapFactory.decodeFile(comment.getUrlImage()));
 
-        editImage.setImageBitmap(BitmapFactory.decodeFile(comment.getUrlImage()));
-        Log.d("Ducdp", "showdialogEditComment: "+BitmapFactory.decodeFile(comment.getUrlImage()));
-
-        editImage.setOnClickListener(this);
+        mcamera = (ImageView) dialoglayout.findViewById(R.id.camera);
+        mcamera.setOnClickListener(this);
         builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -363,9 +340,15 @@ public class ItemActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(ItemActivity.this, "Không có nội dung comment", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                comment.setUrlImage(nameImage);
+                if (nameImage != "") {
+
+                    comment.setUrlImage(nameImage);
+                    Log.d("Ducdp", "onClick: " + nameImage);
+                }
                 comment.setNhanxet(additem.getText().toString());
                 dbHelper.updateNhanxet(comment);
+                getComment();
+                nameImage = "";
                 Log.d("trantp", "onClick: " + dbHelper.updateNhanxet(comment));
                 adapterItem.notifyDataSetChanged();
             }

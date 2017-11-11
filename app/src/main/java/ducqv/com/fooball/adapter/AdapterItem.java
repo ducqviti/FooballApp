@@ -2,49 +2,32 @@ package ducqv.com.fooball.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import ducqv.com.fooball.R;
-import ducqv.com.fooball.action.Listener;
 import ducqv.com.fooball.activity.ItemActivity;
 import ducqv.com.fooball.db.DatabaseHelper;
 import ducqv.com.fooball.object.Comment;
-import ducqv.com.fooball.object.Item;
-
-import android.content.Intent;
-import android.graphics.Bitmap;
 
 /**
  * Created by TOSHIBA on 7/11/2017.
@@ -56,16 +39,10 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private DatabaseHelper dbHelper;
     private int idComment;
 
-    OnEditCameraClick editCameraClick;
-
     public AdapterItem(List<Comment> listData, ItemActivity activity, DatabaseHelper dbHelper) {
         this.listData = listData;
         this.activity = activity;
         this.dbHelper = dbHelper;
-    }
-
-    public int getIdComment() {
-        return idComment;
     }
 
     public void setIdComment(int idComment) {
@@ -83,10 +60,6 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void updateList(List<Comment> data) {
         listData = data;
         notifyDataSetChanged();
-    }
-
-    public Context getApplicationContext() {
-        return activity.getApplicationContext();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder
@@ -146,7 +119,6 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public boolean onLongClick(View v) {
                 showMenuImage(((RecyclerViewHolder) holder).mimg_Menu_coment, position);
-
                 return false;
             }
         });
@@ -179,6 +151,7 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         });
         popupMenu.show();
     }
+
     private void showMenuImage(ImageView img, final int position) {
         PopupMenu popupMenu = new PopupMenu(activity, img);
         popupMenu.getMenuInflater().inflate(R.menu.menu_edit_image, popupMenu.getMenu());
@@ -189,11 +162,11 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     case R.id.mn_chupanh:
                         setIdComment(listData.get(position).getIdComment());
                         activity.showMayAnh(activity.SHOW_EDIT_CAMERA);
-                        Log.d("showMayAnh", "onMenuItemClick: "+activity.SHOW_EDIT_CAMERA);
+                        Log.d("showMayAnh", "onMenuItemClick: " + activity.SHOW_EDIT_CAMERA);
                         break;
                     case R.id.mn_layanh:
                         activity.clickLong(listData.get(position));
-                        Log.d("clickLong", "onLongClick: "+listData.get(position).toString());
+                        Log.d("clickLong", "onLongClick: " + listData.get(position).toString());
                         break;
                 }
                 return false;
@@ -202,13 +175,12 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         popupMenu.show();
     }
 
-
-
     void showdialogDelete(final Comment comment) {
         final AlertDialog alertDialog = new AlertDialog.Builder(
                 activity).create();
         alertDialog.setTitle("Xoá");
         alertDialog.setMessage(" Bạn chắc chắn muốn xoá ?");
+        alertDialog.setCancelable(false);
         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -229,18 +201,6 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     }
                 });
         alertDialog.show();
-    }
-    private boolean isValidAdd(String name) {
-        return name.isEmpty();
-    }
-
-
-    public interface OnEditCameraClick {
-        void setOnCameraClick(int click);
-    }
-
-    public void setOnMenuClickListen(OnEditCameraClick menuCmtClick) {
-        this.editCameraClick = menuCmtClick;
     }
 
 }

@@ -54,10 +54,6 @@ public class Comment implements Parcelable {
         }
     };
 
-    public void setIdComment(int idComment) {
-        this.idComment = idComment;
-    }
-
     public void setIdItem(int idItem) {
         this.idItem = idItem;
     }
@@ -76,14 +72,6 @@ public class Comment implements Parcelable {
 
     public String getNhanxet() {
         return nhanxet;
-    }
-
-    public String getMota() {
-        return mota;
-    }
-
-    public void setMota(String mota) {
-        this.mota = mota;
     }
 
     @Override
